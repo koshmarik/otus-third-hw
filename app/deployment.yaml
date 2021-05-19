@@ -20,7 +20,7 @@ spec:
       containers:
         - name: kuber-hw
           image: >-
-            docker.io/mvkoshenkova/kuberhw:v9
+            docker.io/mvkoshenkova/kuberhw:v10
           env:
             - name: DB_URL
               valueFrom:
@@ -45,4 +45,3 @@ spec:
           ports:
             - name: web
               containerPort: 8080
-              protocol: TCP
