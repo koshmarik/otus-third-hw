@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-hw-service
+  labels:
+    app: prometheus-hw
+  namespace: monitoring
+spec:
+  selector:
+    app: prometheus-hw
+  ports:
+    - protocol: TCP
+      port: 9000
+      targetPort: web
+      nodePort: 32103
+  type: LoadBalancer    

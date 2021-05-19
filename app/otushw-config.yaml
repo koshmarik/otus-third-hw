@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otushw-config
+data:
+  AUTHOR_NAME: Koshenkova
+  DB_URL: jdbc:postgresql://10.99.8.45:5432/otushw
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: otushw-secret
+type: Opaque
+data:
+  DB_USERNAME: bXZrb3NoZW5rb3Zh
+  DB_PASSWORD: N251WTRubWtSVldHOTdRdw==

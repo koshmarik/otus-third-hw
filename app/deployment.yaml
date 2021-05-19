@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-hw-deployment
+  labels:
+    app: prometheus-hw
+  namespace: monitoring
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: prometheus-hw
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: prometheus-hw
+    spec:
+      containers:
+        - name: kuber-hw
+          image: >-
+            docker.io/mvkoshenkova/kuberhw:v9
+          env:
+            - name: DB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: otushw-config
+                  key: DB_URL
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: otushw-secret
+                  key: DB_USERNAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: otushw-secret
+                  key: DB_PASSWORD
+            - name: AUTHOR_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: otushw-config
+                  key: AUTHOR_NAME
+          ports:
+            - name: web
+              containerPort: 8080
+              protocol: TCP
